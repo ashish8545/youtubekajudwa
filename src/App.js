@@ -1,9 +1,12 @@
 import './App.css';
+import Body from './components/Body';
+import Header from './components/Header';
 
 function App() {
   return (
     <div>
-      <h1 className="font-bold p-5">Hello Youtube Ka Judwa</h1>
+      <Header />
+      <Body />
     </div>
   );
 }

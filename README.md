@@ -13,3 +13,10 @@
 - npm install -D tailwindcss
 - npx tailwindcss init
 
+### Planning Components ###
+Header
+Body
+    Sidebar
+    MainContainer
+        ButtonList
+        VideosContainer
