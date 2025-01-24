@@ -20,3 +20,11 @@ Body
     MainContainer
         ButtonList
         VideosContainer
+
+### Install React Icons ###
+npm install react-icons --save
+https://react-icons.github.io/react-icons/
+
+### Designing Header Component ###
+Styling Header Component
+Show/Hide inner search icon on text box focus and blur 
