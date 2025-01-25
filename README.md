@@ -28,3 +28,9 @@ Body
 #### Designing Header Component ####
 - Styling Header Component
 - Show/Hide inner search icon on text box focus and blur 
+- Used grid css for header items
+
+#### Designing Sidebar Component ####
+- Styling Sidebar Component
+- Creating *common components* for side menu items and sign in button
+- Used flex css for menu items

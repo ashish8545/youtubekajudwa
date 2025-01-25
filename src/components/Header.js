@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { FaRegCircleUser } from "react-icons/fa6";
 import { FiMenu, FiSearch, FiUser } from "react-icons/fi";
+import SignInButton from "./common/SignInButton";
 
 const Header = () => {
   const [showInnerSearchIcon, setShowInnerSearchIcon] = useState(false);
@@ -37,10 +39,7 @@ const Header = () => {
         </div>
       </div>
       <div className="col-span-1 flex items-center pr-5">
-        <span className="flex w-6/12 ml-auto text-blue-400 border border-blue-400 rounded-full px-2 py-1 font-semibold text-sm cursor-pointer hover:bg-gray-200">
-          <FiUser className="text-xl pr-1" />
-          Sign In
-        </span>
+        <SignInButton customClassName={`ml-auto`}/>
       </div>
 
 
