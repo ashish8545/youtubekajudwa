@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { FaRegCircleUser } from "react-icons/fa6";
-import { FiMenu, FiSearch, FiUser } from "react-icons/fi";
+import React, { useState } from "react";
+import { FiMenu, FiSearch } from "react-icons/fi";
 import SignInButton from "./common/SignInButton";
+import { useDispatch } from "react-redux";
+import { toggleMenu } from "../utils/slices/appSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const [showInnerSearchIcon, setShowInnerSearchIcon] = useState(false);
 
+  const toggleMenuHandler = () => {
+    dispatch(toggleMenu())
+  }
+
   return (
-    <div className="grid grid-flow-col shadow-md p-1">
+    <div className="grid grid-flow-col shadow-md p-1 sticky top-0 bg-white z-10">
       <div className="flex items-center col-span-1">
-        <span className="ml-4 p-2 cursor-pointer rounded-full hover:bg-gray-200">
+        <span className="ml-4 p-2 cursor-pointer rounded-full hover:bg-gray-200" onClick={toggleMenuHandler}>
           <FiMenu className="text-2xl" />
         </span>
         <img

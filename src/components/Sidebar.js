@@ -4,13 +4,17 @@ import { MdHomeFilled, MdLocalFireDepartment, MdMovieFilter, MdOndemandVideo, Md
 import { TfiControlShuffle } from 'react-icons/tfi'
 import SignInButton from './common/SignInButton'
 import SidebarMenuItem from './common/SidebarMenuItem'
+import { useSelector } from 'react-redux'
+import { HiMiniHome } from 'react-icons/hi2'
 
 const Sidebar = () => {
-  return (
-    <div className="col-span-1 p-4">
+  const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
+
+  return isMenuOpen ? (
+    <div className="mt-2 w-56 h-full overflow-y-auto scrollbar-thin scrollbar-track-zinc-100 scrollbar-thumb-zinc-500">
       <ul className="pb-4">
         <li>
-          <SidebarMenuItem itemName="Home" CustomIconComponent={MdHomeFilled} />
+          <SidebarMenuItem itemName="Home" CustomIconComponent={HiMiniHome} />
         </li>
         <li>
           <SidebarMenuItem itemName="Shorts" CustomIconComponent={TfiControlShuffle} />
@@ -27,7 +31,7 @@ const Sidebar = () => {
           <SidebarMenuItem itemName="History" CustomIconComponent={FaClockRotateLeft} />
         </li>
       </ul>
-      <ul className="pb-4 pt-4 border-t-2">
+      <ul className="py-4 pl-3 border-t-2">
         <li>
           <div className="pb-2 text-sm pl-4">Sign in to like videos,<br/> comment, and subscribe.</div>
         </li>
@@ -37,8 +41,8 @@ const Sidebar = () => {
           </div>
         </li>
       </ul>
-      <h1 className="font-semibold pt-4 border-t-2">Explore</h1>
-      <ul className="pb-4 pt-4">
+      <h1 className="font-semibold pt-4 pl-6 border-t-2">Explore</h1>
+      <ul className="py-4">
         <li>
           <SidebarMenuItem itemName="Trending" CustomIconComponent={MdLocalFireDepartment} />
         </li>
@@ -53,6 +57,26 @@ const Sidebar = () => {
         </li>
         <li>
           <SidebarMenuItem itemName="Live" CustomIconComponent={FaTowerBroadcast} />
+        </li>
+      </ul>
+    </div>
+  ) : (
+    <div className="mt-2">
+      <ul className="pb-4">
+      <li>
+          <SidebarMenuItem itemName="Home" CustomIconComponent={HiMiniHome} isMenuOpen={isMenuOpen} />
+        </li>
+        <li>
+          <SidebarMenuItem itemName="Shorts" CustomIconComponent={TfiControlShuffle} isMenuOpen={isMenuOpen} />
+        </li>
+        <li>
+          <SidebarMenuItem itemName="Subscriptions" CustomIconComponent={MdOndemandVideo} isMenuOpen={isMenuOpen} />
+        </li>
+        <li>
+          <SidebarMenuItem itemName="You" CustomIconComponent={FaCircleUser} isMenuOpen={isMenuOpen} />
+        </li>
+        <li>
+          <SidebarMenuItem itemName="History" CustomIconComponent={FaClockRotateLeft} isMenuOpen={isMenuOpen} />
         </li>
       </ul>
     </div>
