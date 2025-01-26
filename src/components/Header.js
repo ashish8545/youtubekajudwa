@@ -13,7 +13,7 @@ const Header = () => {
   }
 
   return (
-    <div className="grid grid-flow-col shadow-md p-1 sticky top-0 bg-white z-10">
+    <div className="grid grid-flow-col p-1 sticky top-0 bg-white z-10">
       <div className="flex items-center col-span-1">
         <span className="ml-4 p-2 cursor-pointer rounded-full hover:bg-gray-200" onClick={toggleMenuHandler}>
           <FiMenu className="text-2xl" />

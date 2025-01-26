@@ -52,7 +52,7 @@ const VideoCategoriesButtonList = () => {
   }
 
   return (
-    <div className="relative flex w-full mt-2">
+    <div className="flex w-full sticky top-0 bg-white p-2">
         <div ref={carouselRef} className="flex max-w-full overflow-x-auto mx-auto scrollbar-none" onScroll={carouselButtonHandler}>
           <VideoCategoryButton />
           { videoCategories.map(category => <VideoCategoryButton key={category.id} categoryData={category} />) }
