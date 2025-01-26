@@ -3,6 +3,7 @@ import { FiMenu, FiSearch } from "react-icons/fi";
 import SignInButton from "./common/SignInButton";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/slices/appSlice";
+import { PiMicrophoneFill } from "react-icons/pi";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -25,23 +26,28 @@ const Header = () => {
         />
       </div>
       <div className="col-span-10">
-        <div className="w-2/4 m-auto flex items-center pt-2">
-          {showInnerSearchIcon && (
-            <FiSearch className="text-lg ml-3 absolute text-gray-500 transition-opacity duration-300 ease-in-out" />
-          )}
-          <input
-            type="text"
-            placeholder="Search"
-            // className={`w-full rounded-l-full border px-4 py-2 border-gray-300 transition-all duration-300 ease-in-out`}
-            className={`w-full rounded-l-full border border-gray-400 py-2 transition-all duration-300 ease-in-out ${
-              showInnerSearchIcon ? "pl-10 focus:outline-none focus:ring-1 focus:ring-blue-300 focus:border-blue-300" : "pl-5"
-            }`}
-            onFocus={() => setShowInnerSearchIcon(true)}
-            onBlur={() => setShowInnerSearchIcon(false)}
-          />
-          <span className="border border-r-gray-400 border-t-gray-400 border-b-gray-400 px-4 py-2 rounded-r-full cursor-pointer hover:bg-gray-200">
-            <FiSearch className="text-2xl" />
-          </span>
+        <div className="w-3/5 m-auto flex items-center">
+          <div className="flex items-center mt-2 w-full">
+            {showInnerSearchIcon && (
+              <FiSearch className="text-lg ml-3 absolute text-gray-500 transition-opacity duration-300 ease-in-out" />
+            )}
+            <input
+              type="text"
+              placeholder="Search"
+              // className={`w-full rounded-l-full border px-4 py-2 border-gray-300 transition-all duration-300 ease-in-out`}
+              className={`w-full rounded-l-full border border-gray-400 py-2 transition-all duration-300 ease-in-out ${
+                showInnerSearchIcon ? "pl-10 focus:outline-none focus:ring-1 focus:ring-blue-300 focus:border-blue-300" : "pl-5"
+              }`}
+              onFocus={() => setShowInnerSearchIcon(true)}
+              onBlur={() => setShowInnerSearchIcon(false)}
+            />
+            <span className="border border-r-gray-400 border-t-gray-400 border-b-gray-400 px-4 py-[10px] rounded-r-full cursor-pointer hover:bg-gray-200">
+              <FiSearch className="text-xl" />
+            </span>
+          </div>
+          <div className="ml-3">
+            <PiMicrophoneFill className="bg-gray-100 hover:bg-gray-200 text-[45px] rounded-full p-3 mt-2 cursor-pointer" />
+          </div>
         </div>
       </div>
       <div className="col-span-1 flex items-center pr-5">
