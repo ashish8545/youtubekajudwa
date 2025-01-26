@@ -52,3 +52,22 @@ npm i react-redux
         - Mutate State
     - Dispatch action
     - Selector (Subscribe to store)
+
+#### FIRST API CALL ####
+- First API call to get video categories
+- Adding API key to .env file and accessing via process.env.API_KEY
+    - Ideally, sensitive data like keys and personal information must be stored in backend
+    - For more secure architecture, have a backend configuration where we have the key and create an API that uses AUTH to get the key from backend
+    - For this project, we will use .env instead of backend API
+- React (using Create React App) enforces that all environment variables must start with the REACT_APP_ prefix
+    - If prefix is not used, it will return the key as undefined.
+
+#### Video Categories List ####
+- Using video categories API to list buttons with category names
+- Styling video categories button list
+- Designing and making carousel functinal for button horizontal scroll
+    - Hide previous icon initially
+    - Show previous icon when scrolled to right
+    - Hide next icon when scrolled to the end
+    - *Using useRef() to target scrolling container*
+- Adding tailwind custom class in tailwind.config.css for adding gradient to previous and next icons
