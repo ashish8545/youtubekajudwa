@@ -43,7 +43,7 @@ const VideoCategoriesButtonList = () => {
         setShowPrevButton(true);
       }
 
-      if (container.scrollLeft + container.offsetWidth >= container.scrollWidth) {
+      if (container.scrollLeft + container.offsetWidth + 100 >= container.scrollWidth) {
         setShowNextButton(false);
       } else {
         setShowNextButton(true);
@@ -52,7 +52,7 @@ const VideoCategoriesButtonList = () => {
   }
 
   return (
-    <div className="flex w-full sticky top-0 bg-white p-2">
+    <div className="flex w-full sticky top-0 bg-white p-2 z-10">
         <div ref={carouselRef} className="flex max-w-full overflow-x-auto mx-auto scrollbar-none" onScroll={carouselButtonHandler}>
           <VideoCategoryButton />
           { videoCategories.map(category => <VideoCategoryButton key={category.id} categoryData={category} />) }

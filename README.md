@@ -71,3 +71,11 @@ npm i react-redux
     - Hide next icon when scrolled to the end
     - *Using useRef() to target scrolling container*
 - Adding tailwind custom class in tailwind.config.css for adding gradient to previous and next icons
+
+#### Video Cards ####
+- Styling video cards
+- Adding and using new videos and channels API
+- Helper functions
+    - Convert UTC to Number of days ago
+    - Convert number to 1K, 1M, 1B
+- Conditional rendering of elements and css for live videos

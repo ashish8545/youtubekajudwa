@@ -1,6 +1,7 @@
 import React from 'react'
-import { FaCircleUser, FaClockRotateLeft, FaTowerBroadcast } from 'react-icons/fa6'
-import { MdHomeFilled, MdLocalFireDepartment, MdMovieFilter, MdOndemandVideo, MdOutlineShoppingBag, MdQueueMusic } from 'react-icons/md'
+import { FaCircleUser, FaClockRotateLeft } from 'react-icons/fa6'
+import { PiBroadcastFill } from 'react-icons/pi'
+import { MdLocalFireDepartment, MdMovieFilter, MdOndemandVideo, MdOutlineShoppingBag, MdQueueMusic } from 'react-icons/md'
 import { TfiControlShuffle } from 'react-icons/tfi'
 import SignInButton from './common/SignInButton'
 import SidebarMenuItem from './common/SidebarMenuItem'
@@ -56,7 +57,7 @@ const Sidebar = () => {
           <SidebarMenuItem itemName="Movies" CustomIconComponent={MdMovieFilter} />
         </li>
         <li>
-          <SidebarMenuItem itemName="Live" CustomIconComponent={FaTowerBroadcast} />
+          <SidebarMenuItem itemName="Live" CustomIconComponent={PiBroadcastFill} />
         </li>
       </ul>
     </div>
