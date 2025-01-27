@@ -11,7 +11,7 @@ const VideoCard = ({ videoData, channelsList = [] }) => {
     const channelData           = channelsList.filter(channel => channel?.id === snippet?.channelId);
 
     return (
-        <div className={"w-[" + (isMenuOpen ? "400px" : "330px") + "]"}>
+        <div style={(isMenuOpen ? {width: "400px"} : {width: "330px"})}>
             <div className="h-[190px]">
                 <img className="cursor-pointer rounded-2xl w-full h-full object-cover" alt="Video Thumbnail" src={snippet?.thumbnails?.standard?.url} />
             </div>

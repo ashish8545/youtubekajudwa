@@ -32,5 +32,5 @@ export const convertNumberToK = (num) => {
     } else if (num >= 1000) {
         return (num / 1000).toFixed(0) + "K"; // Format for thousands (1k)
     }
-    return num.toString();
+    return num?.toString();
 }

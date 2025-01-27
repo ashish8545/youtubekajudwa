@@ -1,6 +1,6 @@
 # Youtube Clone APP
 
-####    SETUP   ####
+#### Setup ####
 - Download & Install VsCode
 - Download & Install Git
 - Download & Install NodeJS
@@ -8,6 +8,7 @@
 #### Create React APP ####
 - git init
 - npx create-react-app <folder_name>
+- Default Bundler: webpack
 
 #### Install Tailwind ####
 - npm install -D tailwindcss
@@ -79,3 +80,13 @@ npm i react-redux
     - Convert UTC to Number of days ago
     - Convert number to 1K, 1M, 1B
 - Conditional rendering of elements and css for live videos
+
+#### Video Cards Lazy Loading ####
+- Using IntersectionObserver
+    - For observing the element placed at end of the page whether it is intersecting with parent element or viewport
+- useCallback for memoizing function - getVideos() and getChannels()
+- Adding Error Handling
+- *New learning:* 
+    - While setting a state it taks a value OR a callback function (with argument containing value of previous state)
+    - Went into this problem which was mentioned in course and later remembered:
+    - <React.StrictMode> in index.js creates problem of twice component rendering on dev envs but not in production (In DEV, React reconfirms if component is rendered by rendering it twice)
