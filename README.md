@@ -90,3 +90,7 @@ npm i react-redux
     - While setting a state it taks a value OR a callback function (with argument containing value of previous state)
     - Went into this problem which was mentioned in course and later remembered:
     - <React.StrictMode> in index.js creates problem of twice component rendering on dev envs but not in production (In DEV, React reconfirms if component is rendered by rendering it twice)
+
+#### Filtering Videos By Video Category ####
+- Uplifting the state to filter by category id and show / hide loader
+- Adding transparent loader overlay on button list and videos (main container) and disabling click and scroll unless updated data is loaded

@@ -20,7 +20,7 @@ const VideoCard = ({ videoData, channelsList = [] }) => {
                     <div className={"h-12 w-12 rounded-full p-[3px] flex " + (snippet?.liveBroadcastContent === "live" ? "border-[2px] border-red-600" : "")}>
                         <img className="cursor-pointer h-full w-full rounded-full" alt="Channel Image" src={channelData[0]?.snippet?.thumbnails?.default?.url || snippet?.thumbnails?.standard?.url} />
                         {
-                            snippet?.liveBroadcastContent === "live" && <span className="bg-red-600 text-white text-[11px] rounded-2xl px-2 absolute top-[32px] left-[6px]">LIVE</span>
+                            snippet?.liveBroadcastContent === "live" && <span className="bg-red-600 text-white text-[11px] rounded-2xl px-2 absolute top-[32px] left-[6px] z-10">LIVE</span>
                         }
                     </div>
                 </div>
