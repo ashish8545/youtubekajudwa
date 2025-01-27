@@ -14,7 +14,7 @@ const MainContainer = () => {
           style={{ pointerEvents: "auto" }}
         ></div>
       )}
-        <VideoCategoriesButtonList setCategoryId={setCategoryId} />
+        <VideoCategoriesButtonList categoryId={categoryId} setCategoryId={setCategoryId} />
         <VideosContainer categoryId={categoryId} isLoading={isLoading} setIsLoading={setIsLoading} />
     </div>
   )

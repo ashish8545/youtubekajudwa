@@ -3,7 +3,7 @@ import VideoCategoryButton from './VideoCategoryButton';
 import { YOUTUBE_VIDEO_CATEGORIES_API_URL } from '../utils/constants';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 
-const VideoCategoriesButtonList = ({ setCategoryId }) => {
+const VideoCategoriesButtonList = ({ categoryId, setCategoryId }) => {
 
   const carouselRef = useRef(null);
   const [videoCategories, setVideoCategories] = useState([])
@@ -53,9 +53,9 @@ const VideoCategoriesButtonList = ({ setCategoryId }) => {
 
   return (
     <div className="flex w-full sticky top-0 bg-white p-2 z-20">
-        <div ref={carouselRef} className="flex max-w-full overflow-x-auto mx-auto scrollbar-none" onScroll={carouselButtonHandler}>
+        <div ref={carouselRef} className="flex max-w-full overflow-x-auto mx-auto scrollbar-none items-center" onScroll={carouselButtonHandler}>
           <VideoCategoryButton setCategoryId={setCategoryId} />
-          { videoCategories.map(category => <VideoCategoryButton key={category.id} categoryData={category} setCategoryId={setCategoryId} />) }
+          { videoCategories.map(category => <VideoCategoryButton key={category.id} categoryData={category} categoryId={categoryId} setCategoryId={setCategoryId} />) }
         </div>
 
         { showPrevButton && <div className="absolute top-1/2 left-0 -translate-y-1/2 bg-gradient-to-r pl-4 pr-4 py-2">
