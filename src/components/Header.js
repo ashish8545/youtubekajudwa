@@ -1,20 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiMenu, FiSearch } from "react-icons/fi";
 import SignInButton from "./common/SignInButton";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/slices/appSlice";
 import { PiMicrophoneFill } from "react-icons/pi";
 import { ReactComponent as Logo } from "../logo.svg";
-import { REGION_CODE } from "../utils/constants";
+import { REGION_CODE, YOUTUBE_SUGGESTIONS_API } from "../utils/constants";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const dispatch = useDispatch();
+  const dispatch                                      = useDispatch();
   const [showInnerSearchIcon, setShowInnerSearchIcon] = useState(false);
+  const [searchQuery, setSearchQuery]                 = useState("");
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu())
   }
+
+  const getSuggestions = async () => {
+    const data = await fetch(YOUTUBE_SUGGESTIONS_API + searchQuery);
+    const json = await data.json();
+
+    console.log(json);
+  }
+
+  useEffect(() => {
+    const timer = setTimeout(() => getSuggestions(), 2000);
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [searchQuery])
 
   return (
     <div className="grid grid-flow-col sticky top-0 bg-white z-10">
@@ -35,6 +51,7 @@ const Header = () => {
             )}
             <input
               type="text"
+              value={searchQuery}
               placeholder="Search"
               // className={`w-full rounded-l-full border px-4 py-2 border-gray-300 transition-all duration-300 ease-in-out`}
               className={`w-full rounded-l-full border border-gray-400 py-2 transition-all duration-300 ease-in-out ${
@@ -42,6 +59,7 @@ const Header = () => {
               }`}
               onFocus={() => setShowInnerSearchIcon(true)}
               onBlur={() => setShowInnerSearchIcon(false)}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
             <span className="border border-r-gray-400 border-t-gray-400 border-b-gray-400 px-4 py-[10px] rounded-r-full cursor-pointer hover:bg-gray-200">
               <FiSearch className="text-xl" />

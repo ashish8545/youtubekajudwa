@@ -100,3 +100,7 @@ npm i react-router-dom
 
 #### ROUTING ####
 - Configuring routing
+
+#### Search Suggestion API ####
+- Debouncing
+    - Decline the previous API call if the search keystroke is less than 200ms
