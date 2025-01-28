@@ -10,6 +10,7 @@ const VideosContainer = ({ categoryId, isMainLoading, setMainIsLoading, videos, 
   const isMenuOpen                        = useSelector((store) => store.app.isMenuOpen)
 
   const getVideos = useCallback(async (pageToken = "", clearVideos = false) => {
+    console.log({categoryId})
     setIsLoading(true)
     try {
       let liveVideos = [];
@@ -64,15 +65,19 @@ const VideosContainer = ({ categoryId, isMainLoading, setMainIsLoading, videos, 
   }, [videos])
 
   const getChannels = async () => {
-    const existingChannelIds  = channels.map(channel => channel.id);
-    const newChannelIds       = videos
-      .map(video => video?.snippet?.channelId)
-      .filter(channelId => !existingChannelIds.includes(channelId));
-
-    if (newChannelIds.length > 0) {
-      const data = await fetch(YOUTUBE_CHANNELS_API + "&part=snippet%2CcontentDetails%2Cstatistics&id=" + (newChannelIds.join("%2C")));
-      const json = await data.json();
-      setChannels(prevChannels => [...prevChannels, ...(json?.items || [])]);
+    try {
+      const existingChannelIds  = channels.map(channel => channel.id);
+      const newChannelIds       = videos
+        .map(video => video?.snippet?.channelId)
+        .filter(channelId => !existingChannelIds.includes(channelId));
+  
+      if (newChannelIds.length > 0) {
+        const data = await fetch(YOUTUBE_CHANNELS_API + "&part=snippet%2CcontentDetails%2Cstatistics&id=" + (newChannelIds.join("%2C")));
+        const json = await data.json();
+        setChannels(prevChannels => [...prevChannels, ...(json?.items || [])]);
+      }
+    } catch (error) {
+      console.error(error)
     }
   }
 
