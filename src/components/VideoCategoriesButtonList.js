@@ -60,7 +60,7 @@ const VideoCategoriesButtonList = ({ categoryId, setCategoryId, setVideos }) => 
     <div className="flex w-full sticky top-0 bg-white p-2 z-20"> 
       {
         !videoCategories.length ? (
-          <div className="flex m-auto h-screen items-center pb-40">
+          <div className="flex m-auto mt-5">
             <Broken />
           </div>
         ) : (

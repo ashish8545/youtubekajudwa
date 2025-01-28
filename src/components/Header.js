@@ -6,6 +6,7 @@ import { toggleMenu } from "../utils/slices/appSlice";
 import { PiMicrophoneFill } from "react-icons/pi";
 import { ReactComponent as Logo } from "../logo.svg";
 import { REGION_CODE } from "../utils/constants";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Header = () => {
           <FiMenu className="text-2xl" />
         </span>
         <div className="h-5 pl-4 flex cursor-pointer">
-          <Logo />
+          <Link to="/"><Logo /></Link>
         </div>
         <span className="text-[10px] pt-3 pl-1 align-text-top h-full">{ REGION_CODE }</span>
       </div>

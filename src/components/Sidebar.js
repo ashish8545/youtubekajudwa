@@ -7,6 +7,7 @@ import SidebarMenuItem from './common/SidebarMenuItem'
 import { useSelector } from 'react-redux'
 import { HiMiniHome } from 'react-icons/hi2'
 import { ReactComponent as ShortsSvg } from '../shortsIcon.svg'
+import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
@@ -15,7 +16,7 @@ const Sidebar = () => {
     <div className="mt-2 w-60 h-full overflow-y-auto scrollbar-thin scrollbar-track-zinc-100 scrollbar-thumb-zinc-500">
       <ul className="pb-4">
         <li>
-          <SidebarMenuItem itemName="Home" CustomIconComponent={HiMiniHome} />
+          <Link to="/"><SidebarMenuItem itemName="Home" CustomIconComponent={HiMiniHome} /></Link>
         </li>
         <li>
           <SidebarMenuItem itemName="Shorts" CustomIconComponent={ShortsSvg} />

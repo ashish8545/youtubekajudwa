@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import VideoCard from './VideoCard'
 import { YOUTUBE_VIDEOS_API, YOUTUBE_CHANNELS_API, YOUTUBE_SEARCH_API } from '../utils/constants';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const VideosContainer = ({ categoryId, isMainLoading, setMainIsLoading, videos, setVideos }) => {
   const [channels, setChannels]           = useState([]);
@@ -10,7 +11,6 @@ const VideosContainer = ({ categoryId, isMainLoading, setMainIsLoading, videos, 
   const isMenuOpen                        = useSelector((store) => store.app.isMenuOpen)
 
   const getVideos = useCallback(async (pageToken = "", clearVideos = false) => {
-    console.log({categoryId})
     setIsLoading(true)
     try {
       let liveVideos = [];
@@ -102,7 +102,7 @@ const VideosContainer = ({ categoryId, isMainLoading, setMainIsLoading, videos, 
 
   return (
     <div className="p-4 flex flex-wrap gap-6">
-      { videos.map(video => <VideoCard key={video.id} videoData={video} channelsList={channels} />) }
+      { videos.map(video => <Link to={"/watch?v=" + video.id}><VideoCard key={video.id} videoData={video} channelsList={channels} /></Link>) }
       { !isMainLoading && isLoading && <p className="w-full p-2 text-center font-semibold">Loading more...</p> }
       <div id="lazy" className="h-[10px]"></div>
     </div>

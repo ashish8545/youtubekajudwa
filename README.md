@@ -19,6 +19,9 @@
 npm i @reduxjs/toolkit
 npm i react-redux
 
+#### Install React Router DOM ####
+npm i react-router-dom
+
 #### Planning Components ####
 - Header
 - Body
@@ -94,3 +97,6 @@ npm i react-redux
 #### Filtering Videos By Video Category ####
 - Uplifting the state to filter by category id and show / hide loader
 - Adding transparent loader overlay on button list and videos (main container) and disabling click and scroll unless updated data is loaded
+
+#### ROUTING ####
+- Configuring routing
