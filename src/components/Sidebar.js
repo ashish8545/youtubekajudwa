@@ -2,11 +2,11 @@ import React from 'react'
 import { FaCircleUser, FaClockRotateLeft } from 'react-icons/fa6'
 import { PiBroadcastFill } from 'react-icons/pi'
 import { MdLocalFireDepartment, MdMovieFilter, MdOndemandVideo, MdOutlineShoppingBag, MdQueueMusic } from 'react-icons/md'
-import { TfiControlShuffle } from 'react-icons/tfi'
 import SignInButton from './common/SignInButton'
 import SidebarMenuItem from './common/SidebarMenuItem'
 import { useSelector } from 'react-redux'
 import { HiMiniHome } from 'react-icons/hi2'
+import { ReactComponent as ShortsSvg } from '../shortsIcon.svg'
 
 const Sidebar = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
@@ -18,7 +18,7 @@ const Sidebar = () => {
           <SidebarMenuItem itemName="Home" CustomIconComponent={HiMiniHome} />
         </li>
         <li>
-          <SidebarMenuItem itemName="Shorts" CustomIconComponent={TfiControlShuffle} />
+          <SidebarMenuItem itemName="Shorts" CustomIconComponent={ShortsSvg} />
         </li>
         <li>
           <SidebarMenuItem itemName="Subscriptions" CustomIconComponent={MdOndemandVideo} />
@@ -68,7 +68,7 @@ const Sidebar = () => {
           <SidebarMenuItem itemName="Home" CustomIconComponent={HiMiniHome} isMenuOpen={isMenuOpen} />
         </li>
         <li>
-          <SidebarMenuItem itemName="Shorts" CustomIconComponent={TfiControlShuffle} isMenuOpen={isMenuOpen} />
+          <SidebarMenuItem itemName="Shorts" CustomIconComponent={ShortsSvg} isMenuOpen={isMenuOpen} />
         </li>
         <li>
           <SidebarMenuItem itemName="Subscriptions" CustomIconComponent={MdOndemandVideo} isMenuOpen={isMenuOpen} />

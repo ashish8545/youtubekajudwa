@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import VideoCategoryButton from './VideoCategoryButton';
-import { YOUTUBE_VIDEO_CATEGORIES_API_URL } from '../utils/constants';
+import { YOUTUBE_VIDEO_CATEGORIES_API } from '../utils/constants';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 
-const VideoCategoriesButtonList = ({ categoryId, setCategoryId }) => {
+const VideoCategoriesButtonList = ({ categoryId, setCategoryId, setVideos }) => {
 
   const carouselRef = useRef(null);
   const [videoCategories, setVideoCategories] = useState([])
@@ -15,7 +15,7 @@ const VideoCategoriesButtonList = ({ categoryId, setCategoryId }) => {
   }, []);
 
   const getVideoCategories = async () => {
-    const data = await fetch(YOUTUBE_VIDEO_CATEGORIES_API_URL);
+    const data = await fetch(YOUTUBE_VIDEO_CATEGORIES_API + "&part=snippet");
     const json = await data.json();
 
     setVideoCategories(json.items);
@@ -54,8 +54,8 @@ const VideoCategoriesButtonList = ({ categoryId, setCategoryId }) => {
   return (
     <div className="flex w-full sticky top-0 bg-white p-2 z-20">
         <div ref={carouselRef} className="flex max-w-full overflow-x-auto mx-auto scrollbar-none items-center" onScroll={carouselButtonHandler}>
-          <VideoCategoryButton setCategoryId={setCategoryId} />
-          { videoCategories.map(category => <VideoCategoryButton key={category.id} categoryData={category} categoryId={categoryId} setCategoryId={setCategoryId} />) }
+          <VideoCategoryButton setCategoryId={setCategoryId} setVideos={setVideos} />
+          { videoCategories.map(category => <VideoCategoryButton key={category.id} categoryData={category} categoryId={categoryId} setCategoryId={setCategoryId} setVideos={setVideos} />) }
         </div>
 
         { showPrevButton && <div className="absolute top-1/2 left-0 -translate-y-1/2 bg-gradient-to-r pl-4 pr-4 py-2">

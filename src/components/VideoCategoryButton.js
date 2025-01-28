@@ -1,8 +1,9 @@
 import React from 'react'
 
-const VideoCategoryButton = ({ categoryData, categoryId, setCategoryId }) => {
+const VideoCategoryButton = ({ categoryData, categoryId, setCategoryId, setVideos }) => {
     const buttonName = categoryData?.snippet?.title;
     const handleCategoryId = () => {
+        setVideos([]);
         setCategoryId(categoryData?.id || "")
     }
 
