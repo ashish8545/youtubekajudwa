@@ -4,6 +4,8 @@ import SignInButton from "./common/SignInButton";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/slices/appSlice";
 import { PiMicrophoneFill } from "react-icons/pi";
+import { ReactComponent as Logo } from "../logo.svg";
+import { REGION_CODE } from "../utils/constants";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -19,11 +21,15 @@ const Header = () => {
         <span className="ml-4 p-2 cursor-pointer rounded-full hover:bg-gray-200" onClick={toggleMenuHandler}>
           <FiMenu className="text-2xl" />
         </span>
-        <img
+        {/* <img
           className="h-14 pl-1"
           alt="logo"
           src={window.location.origin + "/images/logo.jpg"}
-        />
+        /> */}
+        <div className="h-5 pl-4 flex">
+          <Logo />
+        </div>
+        <span className="text-[10px] pt-3 pl-1 align-text-top h-full">{ REGION_CODE }</span>
       </div>
       <div className="col-span-10">
         <div className="w-3/5 m-auto flex items-center">

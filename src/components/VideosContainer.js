@@ -3,7 +3,7 @@ import VideoCard from './VideoCard'
 import { YOUTUBE_VIDEOS_API, YOUTUBE_CHANNELS_API, YOUTUBE_SEARCH_API } from '../utils/constants';
 import { useSelector } from 'react-redux';
 
-const VideosContainer = ({ categoryId, setMainIsLoading, videos, setVideos }) => {
+const VideosContainer = ({ categoryId, isMainLoading, setMainIsLoading, videos, setVideos }) => {
   const [channels, setChannels]           = useState([]);
   const [nextPageToken, setNextPageToken] = useState("");
   const [isLoading, setIsLoading]         = useState(false);
@@ -98,7 +98,7 @@ const VideosContainer = ({ categoryId, setMainIsLoading, videos, setVideos }) =>
   return (
     <div className="p-2 flex flex-wrap gap-6">
       { videos.map(video => <VideoCard key={video.id} videoData={video} channelsList={channels} />) }
-      { isLoading && <p className="w-full p-2 text-center font-semibold">Loading more...</p> }
+      { !isMainLoading && isLoading && <p className="w-full p-2 text-center font-semibold">Loading more...</p> }
       <div id="lazy" className="h-[10px]"></div>
     </div>
   )

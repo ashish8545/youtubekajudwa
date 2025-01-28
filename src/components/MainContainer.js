@@ -39,7 +39,7 @@ const MainContainer = () => {
         ></div>
       )}
         <VideoCategoriesButtonList categoryId={categoryId} setCategoryId={setCategoryId} setVideos={setVideos} />
-        <VideosContainer categoryId={categoryId} setMainIsLoading={setMainIsLoading} videos={videos} setVideos={setVideos} />
+        <VideosContainer categoryId={categoryId} isMainLoading={isMainLoading} setMainIsLoading={setMainIsLoading} videos={videos} setVideos={setVideos} />
     </div>
   )
 }
