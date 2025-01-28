@@ -16,17 +16,12 @@ const Header = () => {
   }
 
   return (
-    <div className="grid grid-flow-col p-1 sticky top-0 bg-white z-10">
+    <div className="grid grid-flow-col sticky top-0 bg-white z-10">
       <div className="flex items-center col-span-1">
         <span className="ml-4 p-2 cursor-pointer rounded-full hover:bg-gray-200" onClick={toggleMenuHandler}>
           <FiMenu className="text-2xl" />
         </span>
-        {/* <img
-          className="h-14 pl-1"
-          alt="logo"
-          src={window.location.origin + "/images/logo.jpg"}
-        /> */}
-        <div className="h-5 pl-4 flex">
+        <div className="h-5 pl-4 flex cursor-pointer">
           <Logo />
         </div>
         <span className="text-[10px] pt-3 pl-1 align-text-top h-full">{ REGION_CODE }</span>

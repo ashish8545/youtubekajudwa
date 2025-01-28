@@ -96,7 +96,7 @@ const VideosContainer = ({ categoryId, isMainLoading, setMainIsLoading, videos, 
   }, [nextPageToken, isLoading])
 
   return (
-    <div className="p-2 flex flex-wrap gap-6">
+    <div className="p-4 flex flex-wrap gap-6">
       { videos.map(video => <VideoCard key={video.id} videoData={video} channelsList={channels} />) }
       { !isMainLoading && isLoading && <p className="w-full p-2 text-center font-semibold">Loading more...</p> }
       <div id="lazy" className="h-[10px]"></div>

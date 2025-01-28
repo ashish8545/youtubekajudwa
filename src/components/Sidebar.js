@@ -12,7 +12,7 @@ const Sidebar = () => {
   const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
 
   return isMenuOpen ? (
-    <div className="mt-2 w-56 h-full overflow-y-auto scrollbar-thin scrollbar-track-zinc-100 scrollbar-thumb-zinc-500">
+    <div className="mt-2 w-60 h-full overflow-y-auto scrollbar-thin scrollbar-track-zinc-100 scrollbar-thumb-zinc-500">
       <ul className="pb-4">
         <li>
           <SidebarMenuItem itemName="Home" CustomIconComponent={HiMiniHome} />
