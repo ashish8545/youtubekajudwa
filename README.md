@@ -102,5 +102,10 @@ npm i react-router-dom
 - Configuring routing
 
 #### Search Suggestion API ####
+- Styling the search suggestions
 - Debouncing
     - Decline the previous API call if the search keystroke is less than 200ms
+- Caching the API response into redux
+    - Call API only when data is not found for search query in redux (cache)
+    - Highlighted previously searched queries with history icon
+    - Functionality to remove the highlight of previously searched queries

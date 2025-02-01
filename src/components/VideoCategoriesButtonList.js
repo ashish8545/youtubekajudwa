@@ -57,14 +57,16 @@ const VideoCategoriesButtonList = ({ categoryId, setCategoryId, setVideos }) => 
   }
 
   return (
-    <div className="flex w-full sticky top-0 bg-white p-2 z-20"> 
+    <>
       {
         !videoCategories.length ? (
-          <div className="flex m-auto mt-5">
-            <Broken />
+          <div className="flex w-full p-2"> 
+            <div className="flex m-auto mt-5">
+              <Broken />
+            </div>
           </div>
         ) : (
-          <>
+          <div className="flex w-full sticky top-0 bg-white p-2 z-20"> 
             <div ref={carouselRef} className="flex max-w-full overflow-x-auto mx-auto scrollbar-none items-center" onScroll={carouselButtonHandler}>
               <VideoCategoryButton setCategoryId={setCategoryId} setVideos={setVideos} />
               { videoCategories.map(category => <VideoCategoryButton key={category.id} categoryData={category} categoryId={categoryId} setCategoryId={setCategoryId} setVideos={setVideos} />) }
@@ -86,10 +88,10 @@ const VideoCategoriesButtonList = ({ categoryId, setCategoryId, setVideos }) => 
                 <MdArrowForwardIos />
               </button>
             </div> }
-          </>
+          </div>
         ) 
       }
-    </div>
+    </>
   )
 }
 

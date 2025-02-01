@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { FiMenu, FiSearch } from "react-icons/fi";
 import SignInButton from "./common/SignInButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/slices/appSlice";
 import { PiMicrophoneFill } from "react-icons/pi";
 import { ReactComponent as Logo } from "../logo.svg";
 import { REGION_CODE, YOUTUBE_SUGGESTIONS_API } from "../utils/constants";
 import { Link } from "react-router-dom";
+import { cachedResult } from "../utils/slices/searchSlice";
+import { FaClockRotateLeft } from "react-icons/fa6";
 
 const Header = () => {
   const dispatch                                      = useDispatch();
+  const cachedSuggestions                             = useSelector((store) => store.search);
   const [showInnerSearchIcon, setShowInnerSearchIcon] = useState(false);
   const [searchQuery, setSearchQuery]                 = useState("");
+  const [suggestions, setSuggestions]                 = useState([]);
+  const [historyQueries, setHistoryQueries]           = useState([]);
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu())
@@ -21,14 +26,31 @@ const Header = () => {
     const data = await fetch(YOUTUBE_SUGGESTIONS_API + searchQuery);
     const json = await data.json();
 
-    console.log(json);
+    setSuggestions(json?.[1])
+    dispatch(cachedResult({
+      [searchQuery]: json[1]?.sort()
+    }))
+  }
+
+  const removeSuggestion = (suggestion) => {
+    setHistoryQueries(historyQueries.filter(query => query !== suggestion))
   }
 
   useEffect(() => {
-    const timer = setTimeout(() => getSuggestions(), 2000);
-
-    return () => {
-      clearTimeout(timer)
+    if (searchQuery) {
+      const timer = setTimeout(() => {
+        if (cachedSuggestions[searchQuery]) {
+          setSuggestions(cachedSuggestions[searchQuery])
+        } else {
+          getSuggestions()
+        }
+      }, 200);
+  
+      return () => {
+        clearTimeout(timer)
+      }
+    } else {
+      setSuggestions([])
     }
   }, [searchQuery])
 
@@ -58,12 +80,34 @@ const Header = () => {
                 showInnerSearchIcon ? "pl-10 focus:outline-none focus:ring-1 focus:ring-blue-300 focus:border-blue-300" : "pl-5"
               }`}
               onFocus={() => setShowInnerSearchIcon(true)}
-              onBlur={() => setShowInnerSearchIcon(false)}
+              onBlur={() => {
+                setTimeout(() => {
+                  setShowInnerSearchIcon(false)
+                },300)
+              }}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
             <span className="border border-r-gray-400 border-t-gray-400 border-b-gray-400 px-4 py-[10px] rounded-r-full cursor-pointer hover:bg-gray-200">
               <FiSearch className="text-xl" />
             </span>
+            {
+              (showInnerSearchIcon && suggestions.length) ? <ul className="p-2 border-2 absolute top-[52px] ml-4 z-40 bg-white w-[526px] rounded-lg shadow-lg">
+                {suggestions.map((suggestion, i) => 
+                  <li key={i}>
+                    <div className="flex items-center hover:bg-gray-100 cursor-pointer rounded-md">
+                      <div className="flex items-center p-2 w-5/6" onClick={() => {
+                      setSearchQuery(suggestion)
+                      setHistoryQueries([...historyQueries, suggestion])
+                    }}>
+                        {historyQueries.includes(suggestion) ? <FaClockRotateLeft className="mr-4" /> : <FiSearch className="mr-4" />}
+                        {suggestion} 
+                      </div>
+                      {historyQueries.includes(suggestion) && <a role="button" className="text-blue-400" onClick={() => {removeSuggestion(suggestion)}}>Remove</a>}
+                    </div>
+                  </li>
+                )}
+              </ul> : ""
+            }
           </div>
           <div className="ml-3">
             <PiMicrophoneFill className="bg-gray-100 hover:bg-gray-200 text-[45px] rounded-full p-3 mt-2 cursor-pointer" />
