@@ -11,8 +11,8 @@ const VideoCard = ({ videoData, channelsList = [] }) => {
     const channelData           = channelsList.filter(channel => channel?.id === snippet?.channelId);
 
     return (
-        <div style={(isMenuOpen ? {width: "390px"} : {width: "330px"})}>
-            <div style={(isMenuOpen ? {height: "222px"} : {height: "185px"})}>
+        <div style={(isMenuOpen ? {width: "515px"} : {width: "420px"})}>
+            <div style={(isMenuOpen ? {height: "282px"} : {height: "235px"})}>
                 <img className="cursor-pointer rounded-2xl w-full h-full object-cover" alt="Video Thumbnail" src={snippet?.thumbnails?.high?.url} />
             </div>
             <div className="flex py-2 cursor-pointer">

@@ -36,6 +36,13 @@ const Header = () => {
     setHistoryQueries(historyQueries.filter(query => query !== suggestion))
   }
 
+  const getHighlightedText = (text, highlight) => {
+    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+    return parts.map((part, index) =>
+        part.toLowerCase() === highlight.toLowerCase() ? <span key={index} className="font-bold">{part}</span> : part
+    );
+};
+
   useEffect(() => {
     if (searchQuery) {
       const timer = setTimeout(() => {
@@ -55,7 +62,7 @@ const Header = () => {
   }, [searchQuery])
 
   return (
-    <div className="grid grid-flow-col sticky top-0 bg-white z-10">
+    <div className="grid grid-flow-col sticky top-0 bg-white z-20">
       <div className="flex items-center col-span-1">
         <span className="ml-4 p-2 cursor-pointer rounded-full hover:bg-gray-200" onClick={toggleMenuHandler}>
           <FiMenu className="text-2xl" />
@@ -91,16 +98,16 @@ const Header = () => {
               <FiSearch className="text-xl" />
             </span>
             {
-              (showInnerSearchIcon && suggestions.length) ? <ul className="p-2 border-2 absolute top-[52px] ml-4 z-40 bg-white w-[526px] rounded-lg shadow-lg">
+              (showInnerSearchIcon && suggestions.length) ? <ul className="p-2 border-2 absolute top-[52px] ml-4 z-50 bg-white w-[526px] rounded-lg shadow-lg">
                 {suggestions.map((suggestion, i) => 
                   <li key={i}>
                     <div className="flex items-center hover:bg-gray-100 cursor-pointer rounded-md">
-                      <div className="flex items-center p-2 w-5/6" onClick={() => {
+                      <div className="flex items-center p-2 w-5/6 tracking-widero" onClick={() => {
                       setSearchQuery(suggestion)
                       setHistoryQueries([...historyQueries, suggestion])
                     }}>
                         {historyQueries.includes(suggestion) ? <FaClockRotateLeft className="mr-4" /> : <FiSearch className="mr-4" />}
-                        {suggestion} 
+                        {getHighlightedText(suggestion, searchQuery)} 
                       </div>
                       {historyQueries.includes(suggestion) && <a role="button" className="text-blue-400" onClick={() => {removeSuggestion(suggestion)}}>Remove</a>}
                     </div>

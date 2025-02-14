@@ -1,32 +1,44 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import VideoCard from './VideoCard'
 import { YOUTUBE_VIDEOS_API, YOUTUBE_CHANNELS_API, YOUTUBE_SEARCH_API } from '../utils/constants';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { cachedVideosByCategoryId } from '../utils/slices/videosByCategoryIdSlice'
 
 const VideosContainer = ({ categoryId, isMainLoading, setMainIsLoading, videos, setVideos }) => {
+  const dispatch                          = useDispatch();
   const [channels, setChannels]           = useState([]);
   const [nextPageToken, setNextPageToken] = useState("");
   const [isLoading, setIsLoading]         = useState(false);
   const isMenuOpen                        = useSelector((store) => store.app.isMenuOpen)
+  const cachedVideosByCategoryIdResult    = useSelector((store) => store.video_by_category_id)
 
   const getVideos = useCallback(async (pageToken = "", clearVideos = false) => {
     setIsLoading(true)
+
     try {
       let liveVideos = [];
       let videoIds = "";
 
       if (categoryId) {
-        const dataLive = await fetch(YOUTUBE_SEARCH_API + "&eventType=live&type=video&maxResults=5&q=Valorant&videoCategoryId=" + categoryId);
-        const jsonLive = await dataLive.json();
-        videoIds = jsonLive?.items?.map(item => item?.id?.videoId).join(',');
-      }
-
-      if (videoIds.length) {
-        const dataT = await fetch(YOUTUBE_VIDEOS_API + "&id=" + videoIds);
-        const jsonT = await dataT.json();
-
-        liveVideos = jsonT?.items || []
+        if (cachedVideosByCategoryIdResult[categoryId]) {
+          liveVideos = cachedVideosByCategoryIdResult[categoryId]
+        } else {
+          const dataLive = await fetch(YOUTUBE_SEARCH_API + "&eventType=live&type=video&maxResults=5&q=Valorant&videoCategoryId=" + categoryId);
+          const jsonLive = await dataLive.json();
+          videoIds = jsonLive?.items?.map(item => item?.id?.videoId).join(',');
+    
+          if (videoIds.length) {
+            const dataT = await fetch(YOUTUBE_VIDEOS_API + "&id=" + videoIds);
+            const jsonT = await dataT.json();
+    
+            liveVideos = jsonT?.items || []
+          }
+        }
+  
+        dispatch(cachedVideosByCategoryId({
+          [categoryId]: liveVideos
+        }))
       }
 
       let maxResults = (isMenuOpen) ? 15 : 16;
@@ -102,7 +114,7 @@ const VideosContainer = ({ categoryId, isMainLoading, setMainIsLoading, videos, 
 
   return (
     <div className="p-4 flex flex-wrap gap-6">
-      { videos.map(video => <Link to={"/watch?v=" + video.id}><VideoCard key={video.id} videoData={video} channelsList={channels} /></Link>) }
+      { videos.map(video => <Link to={"/watch?v=" + video.id} key={video.id}><VideoCard videoData={video} channelsList={channels} /></Link>) }
       { !isMainLoading && isLoading && <p className="w-full p-2 text-center font-semibold">Loading more...</p> }
       <div id="lazy" className="h-[10px]"></div>
     </div>

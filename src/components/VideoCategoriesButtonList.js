@@ -3,26 +3,35 @@ import VideoCategoryButton from './VideoCategoryButton';
 import { YOUTUBE_VIDEO_CATEGORIES_API } from '../utils/constants';
 import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import Broken from './common/Broken';
+import { useDispatch, useSelector } from 'react-redux';
+import { cachedVideoCategories } from '../utils/slices/videoCategoriesSlice';
 
 const VideoCategoriesButtonList = ({ categoryId, setCategoryId, setVideos }) => {
 
-  const carouselRef = useRef(null);
+  const carouselRef                           = useRef(null);
+  const dispatch                              = useDispatch();
+  const videoCategoriesCached                 = useSelector((store) => store.video_category)
   const [videoCategories, setVideoCategories] = useState([])
-  const [showPrevButton, setShowPrevButton] = useState(false);
-  const [showNextButton, setShowNextButton] = useState(true);
+  const [showPrevButton, setShowPrevButton]   = useState(false);
+  const [showNextButton, setShowNextButton]   = useState(true);
 
   useEffect(() => {
     getVideoCategories();
   }, []);
 
   const getVideoCategories = async () => {
-    try {
-      const data = await fetch(YOUTUBE_VIDEO_CATEGORIES_API + "&part=snippet");
-      const json = await data.json();
-  
-      setVideoCategories(json.items || []);
-    } catch (error) {
-      console.error("Error fetching videos: " + error)
+    if (videoCategoriesCached && videoCategoriesCached.length) {
+      setVideoCategories(videoCategoriesCached);
+    } else {
+      try {
+        const data = await fetch(YOUTUBE_VIDEO_CATEGORIES_API + "&part=snippet");
+        const json = await data.json();
+    
+        setVideoCategories(json.items || []);
+        dispatch(cachedVideoCategories(json.items || []))
+      } catch (error) {
+        console.error("Error fetching videos: " + error)
+      }
     }
   }
 
@@ -66,7 +75,7 @@ const VideoCategoriesButtonList = ({ categoryId, setCategoryId, setVideos }) => 
             </div>
           </div>
         ) : (
-          <div className="flex w-full sticky top-0 bg-white p-2 z-20"> 
+          <div className="flex w-full sticky top-0 bg-white p-2 z-10"> 
             <div ref={carouselRef} className="flex max-w-full overflow-x-auto mx-auto scrollbar-none items-center" onScroll={carouselButtonHandler}>
               <VideoCategoryButton setCategoryId={setCategoryId} setVideos={setVideos} />
               { videoCategories.map(category => <VideoCategoryButton key={category.id} categoryData={category} categoryId={categoryId} setCategoryId={setCategoryId} setVideos={setVideos} />) }
