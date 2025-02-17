@@ -95,7 +95,7 @@ const VideosContainer = ({ categoryId, isMainLoading, setMainIsLoading, videos, 
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && nextPageToken && !isLoading) {
+      if (videos.length && entries[0].isIntersecting && nextPageToken && !isLoading) {
         getVideos(nextPageToken);
       }
     }, { threshold: 1.0 });
@@ -110,7 +110,7 @@ const VideosContainer = ({ categoryId, isMainLoading, setMainIsLoading, videos, 
         observer.unobserve(lazyElement)
       }
     }
-  }, [nextPageToken, isLoading])
+  }, [nextPageToken, isLoading, videos])
 
   return (
     <div className="p-4 flex flex-wrap gap-6">
