@@ -5,6 +5,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { addUser, removeUser } from '../utils/slices/userSlice';
 import { useDispatch } from 'react-redux';
 import { auth } from '../utils/firebase';
+import { clearSubscriptions } from '../utils/slices/subscriptionsSlice';
+import { clearToken } from '../utils/slices/tokenSlice';
 
 const Body = () => {
 
@@ -16,6 +18,8 @@ const Body = () => {
         dispatch(addUser({uid: user?.uid, email: user?.email, displayName: user?.displayName, photoURL: user?.photoURL }))
       } else {
         dispatch(removeUser())
+        dispatch(clearSubscriptions())
+        dispatch(clearToken())
       }
     });
   }, [])

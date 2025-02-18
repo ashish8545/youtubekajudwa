@@ -2,13 +2,14 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { FIREBASE_API_KEY } from "./constants";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyBcCcUEHIKEVkzt45n8_uNGkIYcY3gheG4",
+  apiKey: FIREBASE_API_KEY,
   authDomain: "judwatube.firebaseapp.com",
   projectId: "judwatube",
   storageBucket: "judwatube.firebasestorage.app",
@@ -25,5 +26,6 @@ const auth = getAuth();
 auth.useDeviceLanguage(); // User preferred language
 
 const googleProvider = new GoogleAuthProvider();
+googleProvider.addScope("https://www.googleapis.com/auth/youtube.readonly");
 
 export { auth, googleProvider }

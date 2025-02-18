@@ -125,3 +125,7 @@ npm i react-router-dom
 - Sign in functionality with popup - signInWithPopup()
 - Sign out functionality - signOut()
 - Observing and manager redux user data with onAuthStateChanged()
+
+#### Sidebar Subscriptions API ####
+- Integrating subscriptions API with bearer token (This API requires OAuth authorization token from google - received after login successfull)
+- Showing the user's subscribed channels in sidebar, if the user is logged in

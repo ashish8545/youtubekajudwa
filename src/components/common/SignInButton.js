@@ -2,14 +2,20 @@ import React from 'react'
 import { FaRegCircleUser } from 'react-icons/fa6'
 import { auth, googleProvider } from '../../utils/firebase';
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { useDispatch } from 'react-redux';
+import { token } from '../../utils/slices/tokenSlice';
 
 const SignInButton = ({ customClassName }) => {
+
+  const dispatch = useDispatch();
 
   const handleSignIn = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken; // This token can be used for Google APIs
+        const googleToken = credential.accessToken; // This token can be used for Google APIs
+        
+        dispatch(token(googleToken))
         console.log("Logged in successfully! ")
       }).catch((error) => {
         const errorCode = error?.code;

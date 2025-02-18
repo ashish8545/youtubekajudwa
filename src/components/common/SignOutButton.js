@@ -16,7 +16,7 @@ const SignOutButton = ({ customClassName }) => {
     }
 
     return (
-        <div className={`flex w-[108px] items-center justify-center text-rose-600 border border-gray-300 rounded-full py-1 font-semibold text-sm cursor-pointer hover:bg-gray-200 ` + customClassName} onClick={handleSignOut}>
+        <div className={`flex w-[108px] items-center justify-center text-rose-600 border border-gray-300 rounded-full pl-1 pr-2 font-semibold text-sm cursor-pointer hover:bg-gray-200 ` + customClassName} onClick={handleSignOut}>
             <img alt="Profile pic" src={userData?.photoURL} className="w-8 h-8 rounded-full mr-2" />
             Sign Out
         </div>
