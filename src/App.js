@@ -6,7 +6,6 @@ import appStore from './utils/appStore';
 import MainContainer from './components/MainContainer';
 import WatchPage from './components/WatchPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Broken from './components/common/Broken';
 
 function App() {
   const appRouter = createBrowserRouter([{

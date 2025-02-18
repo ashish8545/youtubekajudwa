@@ -109,3 +109,19 @@ npm i react-router-dom
     - Call API only when data is not found for search query in redux (cache)
     - Highlighted previously searched queries with history icon
     - Functionality to remove the highlight of previously searched queries
+
+#### Firebase Setup ####
+- Installing and integrating Google Firebase
+    - npm install firebase (Add firebase SDK)
+    - Copy configuration to firebase.js
+    - npm install -g firebase-tools (Hosting)
+    - firebase login (Sign in to Google)
+    - firebase init (Initiate your project)
+- Deploying the app to production
+    - firebase deploy
+
+#### User Authentication (Login/Signup) ####
+- Configuring Google Auth with firebase (OAuth 2.0)
+- Sign in functionality with popup - signInWithPopup()
+- Sign out functionality - signOut()
+- Observing and manager redux user data with onAuthStateChanged()

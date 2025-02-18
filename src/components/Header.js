@@ -9,10 +9,12 @@ import { REGION_CODE, YOUTUBE_SUGGESTIONS_API } from "../utils/constants";
 import { Link } from "react-router-dom";
 import { cachedResult } from "../utils/slices/searchSlice";
 import { FaClockRotateLeft } from "react-icons/fa6";
+import SignOutButton from "./common/SignOutButton";
 
 const Header = () => {
   const dispatch                                      = useDispatch();
   const cachedSuggestions                             = useSelector((store) => store.search);
+  const userData                                      = useSelector((store) => store.user);
   const [showInnerSearchIcon, setShowInnerSearchIcon] = useState(false);
   const [searchQuery, setSearchQuery]                 = useState("");
   const [suggestions, setSuggestions]                 = useState([]);
@@ -41,7 +43,7 @@ const Header = () => {
     return parts.map((part, index) =>
         part.toLowerCase() === highlight.toLowerCase() ? <span key={index} className="font-bold">{part}</span> : part
     );
-};
+  };
 
   useEffect(() => {
     if (searchQuery) {
@@ -122,7 +124,7 @@ const Header = () => {
         </div>
       </div>
       <div className="col-span-1 flex items-center pr-5">
-        <SignInButton customClassName={`ml-auto`}/>
+        { (userData && userData?.uid) ? <SignOutButton customClassName={`ml-auto`}/> : <SignInButton customClassName={`ml-auto`}/> }
       </div>
 
 
