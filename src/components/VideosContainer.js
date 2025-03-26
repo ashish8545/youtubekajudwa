@@ -113,7 +113,7 @@ const VideosContainer = ({ categoryId, isMainLoading, setMainIsLoading, videos, 
   }, [nextPageToken, isLoading, videos])
 
   return (
-    <div className="p-4 flex flex-wrap gap-6">
+    <div className={"p-4 grid gap-6 " + (isMenuOpen ? "grid-cols-3" : "grid-cols-4")}>
       { videos.map(video => <Link to={"/watch?v=" + video.id} key={video.id}><VideoCard videoData={video} channelsList={channels} /></Link>) }
       { !isMainLoading && isLoading && <p className="w-full p-2 text-center font-semibold">Loading more...</p> }
       <div id="lazy" className="h-[10px]"></div>

@@ -107,6 +107,9 @@ const Header = () => {
                 },300)
               }}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSubmit();
+              }}
             />
             <span className="border border-r-gray-400 border-t-gray-400 border-b-gray-400 px-4 py-[10px] rounded-r-full cursor-pointer hover:bg-gray-200" onClick={handleSubmit}>
               <FiSearch className="text-xl" />

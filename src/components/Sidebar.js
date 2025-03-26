@@ -142,8 +142,8 @@ const Sidebar = () => {
   ) : (
     <div className="mt-2">
       <ul className="pb-4">
-      <li>
-          <SidebarMenuItem itemName="Home" CustomIconComponent={HiMiniHome} isMenuOpen={isMenuOpen} />
+        <li>
+          <Link to="/"><SidebarMenuItem itemName="Home" CustomIconComponent={HiMiniHome} isMenuOpen={isMenuOpen} /></Link>
         </li>
         <li>
           <SidebarMenuItem itemName="Shorts" CustomIconComponent={ShortsSvg} isMenuOpen={isMenuOpen} />

@@ -108,7 +108,7 @@ const ResultsPage = () => {
                             }
 
                             <div className="flex items-center gap-3 pt-4">
-                                <img className="cursor-pointer h-full w-full rounded-full h-10 w-10" alt="Channel Image" src={channels[video?.snippet?.channelId]?.snippet?.thumbnails?.default?.url || channels[video?.snippet?.channelId]?.snippet?.thumbnails?.high?.url} />
+                                <img className="cursor-pointer rounded-full h-10 w-10" alt="Channel" src={channels[video?.snippet?.channelId]?.snippet?.thumbnails?.default?.url || channels[video?.snippet?.channelId]?.snippet?.thumbnails?.high?.url} />
                                 <h4 className="text-md">{channels[video?.snippet?.channelId]?.snippet?.title}</h4>
                             </div>
 
