@@ -6,6 +6,7 @@ import videosByCategoryIdReducer from "./slices/videosByCategoryIdSlice";
 import userReducer from "./slices/userSlice";
 import subscriptionsReducer from "./slices/subscriptionsSlice";
 import tokenReducer from "./slices/tokenSlice";
+import resultsReducer from "./slices/resultsSlice";
 
 const appStore = configureStore({
     reducer: {
@@ -15,7 +16,8 @@ const appStore = configureStore({
         video_by_category_id: videosByCategoryIdReducer,
         user: userReducer,
         subscriptions: subscriptionsReducer,
-        token: tokenReducer
+        token: tokenReducer,
+        results: resultsReducer,
     }
 });
 

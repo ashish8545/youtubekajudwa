@@ -129,3 +129,9 @@ npm i react-router-dom
 #### Sidebar Subscriptions API ####
 - Integrating subscriptions API with bearer token (This API requires OAuth authorization token from google - received after login successfull)
 - Showing the user's subscribed channels in sidebar, if the user is logged in
+
+#### Search Results Page ####
+- Implementing the search results page
+- Using useNavigate() & useSearchParams() react router hooks to navigate and get the search params
+- Caching the search results into redux
+- Styling the results page

@@ -6,7 +6,7 @@ import { toggleMenu } from "../utils/slices/appSlice";
 import { PiMicrophoneFill } from "react-icons/pi";
 import { ReactComponent as Logo } from "../logo.svg";
 import { REGION_CODE, YOUTUBE_SUGGESTIONS_API } from "../utils/constants";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { cachedResult } from "../utils/slices/searchSlice";
 import { FaClockRotateLeft } from "react-icons/fa6";
 import SignOutButton from "./common/SignOutButton";
@@ -19,6 +19,8 @@ const Header = () => {
   const [searchQuery, setSearchQuery]                 = useState("");
   const [suggestions, setSuggestions]                 = useState([]);
   const [historyQueries, setHistoryQueries]           = useState([]);
+  const [searchParams]                                = useSearchParams();
+  const navigate                                      = useNavigate();
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu())
@@ -45,6 +47,10 @@ const Header = () => {
     );
   };
 
+  const handleSubmit = () => {
+    navigate("/results?search_query=" + searchQuery);
+  }
+
   useEffect(() => {
     if (searchQuery) {
       const timer = setTimeout(() => {
@@ -62,6 +68,13 @@ const Header = () => {
       setSuggestions([])
     }
   }, [searchQuery])
+
+  useEffect(() => {
+    const searchQuery = searchParams.get("search_query")
+    if (searchQuery) {
+      setSearchQuery(searchQuery)
+    }
+  }, [])
 
   return (
     <div className="grid grid-flow-col sticky top-0 bg-white z-20">
@@ -84,7 +97,6 @@ const Header = () => {
               type="text"
               value={searchQuery}
               placeholder="Search"
-              // className={`w-full rounded-l-full border px-4 py-2 border-gray-300 transition-all duration-300 ease-in-out`}
               className={`w-full rounded-l-full border border-gray-400 py-2 transition-all duration-300 ease-in-out ${
                 showInnerSearchIcon ? "pl-10 focus:outline-none focus:ring-1 focus:ring-blue-300 focus:border-blue-300" : "pl-5"
               }`}
@@ -96,13 +108,13 @@ const Header = () => {
               }}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <span className="border border-r-gray-400 border-t-gray-400 border-b-gray-400 px-4 py-[10px] rounded-r-full cursor-pointer hover:bg-gray-200">
+            <span className="border border-r-gray-400 border-t-gray-400 border-b-gray-400 px-4 py-[10px] rounded-r-full cursor-pointer hover:bg-gray-200" onClick={handleSubmit}>
               <FiSearch className="text-xl" />
             </span>
             {
               (showInnerSearchIcon && suggestions.length) ? <ul className="p-2 border-2 absolute top-[52px] ml-4 z-50 bg-white w-[526px] rounded-lg shadow-lg">
                 {suggestions.map((suggestion, i) => 
-                  <li key={i}>
+                  <li key={i} onClick={handleSubmit}>
                     <div className="flex items-center hover:bg-gray-100 cursor-pointer rounded-md">
                       <div className="flex items-center p-2 w-5/6 tracking-widero" onClick={() => {
                       setSearchQuery(suggestion)

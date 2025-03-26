@@ -13,7 +13,7 @@ const VideoCard = ({ videoData, channelsList = [] }) => {
     return (
         <div style={(isMenuOpen ? {width: "515px"} : {width: "420px"})}>
             <div style={(isMenuOpen ? {height: "282px"} : {height: "235px"})}>
-                <iframe 
+                {/* <iframe 
                     width="100%" 
                     height="100%" 
                     loading="eager"
@@ -24,8 +24,8 @@ const VideoCard = ({ videoData, channelsList = [] }) => {
                     allowfullscreen
                     className="cursor-pointer rounded-2xl"
                 >
-                </iframe>
-                {/* <img className="cursor-pointer rounded-2xl w-full h-full object-cover" alt="Video Thumbnail" src={snippet?.thumbnails?.high?.url} /> */}
+                </iframe> */}
+                <img className="cursor-pointer rounded-2xl w-full h-full object-cover" alt="Video Thumbnail" src={snippet?.thumbnails?.high?.url} />
             </div>
             <div className="flex py-2 cursor-pointer">
                 <div className="relative">
