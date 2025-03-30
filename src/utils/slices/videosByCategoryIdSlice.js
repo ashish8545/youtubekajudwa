@@ -6,6 +6,13 @@ const videosByCategoryIdSlice = createSlice({
     reducers: {
         cachedVideosByCategoryId: (state, action) => {
             Object.assign(state, action.payload)
+
+            // LRU - Least Recently Used
+            const keys = Object.keys(state);
+
+            if (Object.keys(state) > 10) {
+                keys.slice(0, 5).forEach(key => delete state[key]);
+            }
         }
     }
 })

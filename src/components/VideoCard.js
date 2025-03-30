@@ -14,7 +14,7 @@ const VideoCard = ({ videoData, channelsList = [] }) => {
 
   return (
     <div>
-      <div className={isMenuOpen ? "h-[275px]" : "h-[225px]"}>
+      <div className={isMenuOpen ? "h-[275px]": "h-[225px]"}>
         {/* <iframe 
                     width="100%" 
                     height="100%" 
@@ -28,7 +28,7 @@ const VideoCard = ({ videoData, channelsList = [] }) => {
                 >
                 </iframe> */}
         <img
-          className="cursor-pointer rounded-2xl w-full h-full object-cover"
+          className={"cursor-pointer rounded-2xl w-full h-full object-cover "}
           alt="Video Thumbnail"
           src={snippet?.thumbnails?.high?.url}
         />

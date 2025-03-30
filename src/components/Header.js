@@ -43,7 +43,7 @@ const Header = () => {
   const getHighlightedText = (text, highlight) => {
     const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
     return parts.map((part, index) =>
-        part.toLowerCase() === highlight.toLowerCase() ? <span key={index} className="font-bold">{part}</span> : part
+        part.toLowerCase() === highlight.toLowerCase() ? <span key={index} className="font-bold pr-1">{part}</span> : part
     );
   };
 
@@ -119,7 +119,7 @@ const Header = () => {
                 {suggestions.map((suggestion, i) => 
                   <li key={i} onClick={handleSubmit}>
                     <div className="flex items-center hover:bg-gray-100 cursor-pointer rounded-md">
-                      <div className="flex items-center p-2 w-5/6 tracking-widero" onClick={() => {
+                      <div className="flex items-center p-2 w-5/6" onClick={() => {
                       setSearchQuery(suggestion)
                       setHistoryQueries([...historyQueries, suggestion])
                     }}>
