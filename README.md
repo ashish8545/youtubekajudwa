@@ -142,4 +142,10 @@ npm i react-router-dom
 #### Watch Page ####
 - Styling the watch Page
 - Dummy Like / Dislike selection with tailwind animation library
-- Description Read more / Show less functionality 
+- Description Read more / Show less functionality
+- Comments
+    - Implementing comments using Youtube API
+    - Adding nested comments
+    - Implementing recursion for comment replies
+    - Collapsible replies with count
+    - Last commented time

@@ -1,45 +1,53 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { DESCRIPTION_OFFSET, YOUTUBE_CHANNELS_API, YOUTUBE_VIDEOS_API } from "../utils/constants";
+import { DESCRIPTION_OFFSET, YOUTUBE_CHANNELS_API, YOUTUBE_COMMENTS_API, YOUTUBE_VIDEOS_API } from "../utils/constants";
 import Broken from "./common/Broken";
 import { convertNumberToK } from "../utils/helper";
 import { SlActionRedo } from "react-icons/sl";
 import { VscThumbsdown, VscThumbsdownFilled, VscThumbsup, VscThumbsupFilled } from "react-icons/vsc";
+import CommentsList from "./CommentsList";
 
 const WatchPage = () => {
-  const [videoData, setVideoData]     = useState([]);
-  const [channelData, setChannelData] = useState([]);
-  const [isReadMore, setIsReadMore]   = useState(false);
-  const [isLiked, setIsLiked]         = useState(false);
-  const [isDisliked, setIsDisliked]   = useState(false);
-  const [searchParams]                = useSearchParams();
-  const isMenuOpen                    = useSelector((store) => store.app.isMenuOpen)
-  const userData                      = useSelector((store) => store.user);
-  const searchQuery                   = decodeURIComponent(searchParams.get("v"));
+  const [videoData, setVideoData]       = useState([]);
+  const [channelData, setChannelData]   = useState([]);
+  const [commentsData, setCommentsData] = useState([]);
+  const [isReadMore, setIsReadMore]     = useState(false);
+  const [isLiked, setIsLiked]           = useState(false);
+  const [isDisliked, setIsDisliked]     = useState(false);
+  const [searchParams]                  = useSearchParams();
+  const userData                        = useSelector((store) => store.user);
+  const searchQuery                     = decodeURIComponent(searchParams.get("v"));
 
-  const fetchVideo = async () => {
+  const fetchVideoDetails = async () => {
     try {
       const data = await fetch(YOUTUBE_VIDEOS_API + "&id=" + searchQuery)
       const json = await data.json();
   
-      console.log(json?.items)
       setVideoData(json?.items || [])
 
       if (json?.items?.length === 1) {
+        // Channel Data
         const channelData = await fetch(YOUTUBE_CHANNELS_API + "&part=snippet%2CcontentDetails%2Cstatistics&id=" + json?.items[0]?.snippet?.channelId);
         const channelJson = await channelData.json();
 
-        console.log(channelJson?.items)
-        setChannelData(channelJson?.items)
+        setChannelData(channelJson?.items || [])
+
+        // Comments Data
+        console.log(YOUTUBE_COMMENTS_API + "&videoId=" + searchQuery)
+        const commentsData = await fetch(YOUTUBE_COMMENTS_API + "&videoId=" + searchQuery)
+        const commentsJson = await commentsData.json();
+
+        setCommentsData(commentsJson?.items || [])
       }
+
     } catch (error) {
       console.error("Failed to fetch video data: " + error)
     }
   }
 
   useEffect(() => {
-    fetchVideo()
+    fetchVideoDetails()
   }, [])
 
   return (
@@ -114,6 +122,9 @@ const WatchPage = () => {
             </div>
             <div className="pt-4">
               <h2 className="text-2xl font-bold pb-2">Comments</h2>
+              <div>
+                <CommentsList commentsData={commentsData} parentCommentId={0} />
+              </div>
               <input type="text" className="w-full pb-2 resize-none min-h-[24px] max-h-24 overflow-y-auto text-xl bg-transparent border-b border-b-gray-300 focus:border-b focus:border-black focus:outline-none" />
               <div className="flex">
                 <div className="ml-auto mt-2">
