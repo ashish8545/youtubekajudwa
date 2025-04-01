@@ -97,7 +97,7 @@ const WatchPage = () => {
                           if (isDisliked === true) setIsDisliked(false)
                         }}>
                           {isLiked ? <VscThumbsupFilled className="ml-2 mr-2 text-2xl animate-jump-in" /> : <VscThumbsup className="ml-2 mr-2 text-2xl" />}
-                          <span className="mr-2">{convertNumberToK(videoData[0]?.statistics?.viewCount)}</span>
+                          <span className="mr-2">{isLiked ? convertNumberToK(Number(videoData[0]?.statistics?.viewCount) + 1) : convertNumberToK(videoData[0]?.statistics?.viewCount)}</span>
                         </span>
                         <span className="text-gray-400 text-2xl">|</span>
                         <span className="px-4 py-2 rounded-r-full hover:bg-gray-200" onClick={() => {
