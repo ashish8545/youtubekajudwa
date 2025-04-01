@@ -135,3 +135,11 @@ npm i react-router-dom
 - Using useNavigate() & useSearchParams() react router hooks to navigate and get the search params
 - Caching the search results into redux
 - Styling the results page
+
+#### LRU - Least Recently Used ####
+- Implemented LRU for redux cache to remove data after certain limit so that it doesn't bloats the redux store
+
+#### Watch Page ####
+- Styling the watch Page
+- Dummy Like / Dislike selection with tailwind animation library
+- Description Read more / Show less functionality 

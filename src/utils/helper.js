@@ -26,9 +26,9 @@ export const convertUtcToDaysAgo = (utcTimestamp) => {
 // Converts thounds to 1K
 export const convertNumberToK = (num) => {
     if (num >= 1000000000) {
-        return (num / 1000000000).toFixed(1) + "B"; // Format for billions (1B)
+        return (num / 1000000000).toFixed(0) + "B"; // Format for billions (1B)
     } else if (num >= 1000000) {
-        return (num / 1000000).toFixed(1) + "M"; // Format for millions (1M)
+        return (num / 1000000).toFixed(0) + "M"; // Format for millions (1M)
     } else if (num >= 1000) {
         return (num / 1000).toFixed(0) + "K"; // Format for thousands (1k)
     }
