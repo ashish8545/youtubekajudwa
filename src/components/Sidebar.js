@@ -27,7 +27,7 @@ const Sidebar = () => {
       const data = await fetch(YOUTUBE_SUBSCRIPTIONS_API,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${(token || localStorage.getItem("token"))}`,
         },
       })
       const json = await data.json()
@@ -42,7 +42,7 @@ const Sidebar = () => {
     if (userData && userData.uid) {
       getChannels();
     }
-  }, [token])
+  }, [token, userData])
 
   return isMenuOpen ? (
     <div className="mt-2 w-60 h-full overflow-y-auto scrollbar-thin scrollbar-track-zinc-100 scrollbar-thumb-zinc-500">

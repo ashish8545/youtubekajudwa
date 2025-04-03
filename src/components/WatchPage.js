@@ -7,11 +7,13 @@ import { convertNumberToK } from "../utils/helper";
 import { SlActionRedo } from "react-icons/sl";
 import { VscThumbsdown, VscThumbsdownFilled, VscThumbsup, VscThumbsupFilled } from "react-icons/vsc";
 import CommentsList from "./CommentsList";
+import SignInButton from "./common/SignInButton";
 
 const WatchPage = () => {
   const [videoData, setVideoData]       = useState([]);
   const [channelData, setChannelData]   = useState([]);
   const [commentsData, setCommentsData] = useState([]);
+  const [comment, setComment]           = useState("");
   const [isReadMore, setIsReadMore]     = useState(false);
   const [isLiked, setIsLiked]           = useState(false);
   const [isDisliked, setIsDisliked]     = useState(false);
@@ -46,6 +48,23 @@ const WatchPage = () => {
     }
   }
 
+  const handleAddComment = (e) => {
+    e.preventDefault();
+
+    let commentData = {
+      snippet: {
+          id: Math.floor(Math.random()*(999-100+1)+100),
+          authorProfileImageUrl: userData?.photoURL,
+          authorDisplayName: userData.displayName,
+          textDisplay: comment,
+          updatedAt: new Date().toISOString()
+      }
+    }
+
+    setComment("")
+    setCommentsData([...commentsData, commentData]);
+  }
+
   useEffect(() => {
     fetchVideoDetails()
   }, [])
@@ -59,7 +78,7 @@ const WatchPage = () => {
               <iframe
                 width="100%"
                 height="600px"
-                src={"https://www.youtube.com/embed/" + searchQuery}
+                src={"https://www.youtube.com/embed/" + searchQuery + "?autoplay=1"}
                 title="Youtube Video Player"
                 allow="accelerometer; autoplay; clipboard-write"
                 allowFullScreen
@@ -86,27 +105,34 @@ const WatchPage = () => {
                   }
                 </div>
                 <div className="ml-4">
-                  {(userData && userData?.uid) ? <button className="bg-black py-3 px-7 text-md rounded-full text-white hover:bg-gray-800 tracking-wider">Subscribe</button> : "" }
+                  {
+                    (userData && userData?.uid) 
+                      ? <button className="bg-black py-3 px-7 text-md rounded-full text-white hover:bg-gray-800 tracking-wider">Subscribe</button> 
+                      : <SignInButton buttonText="Sign In to Subscribe" customClassName="w-full" />
+                  }
                 </div>
               </div>
               <div className="w-3/5 flex pr-3">
                   <div className="flex items-center ml-auto">
-                    <span className="mr-8 rounded-full border border-black flex items-center cursor-pointer">
-                        <span className="hover:bg-gray-200 flex items-center h-full w-full rounded-l-full p-2" onClick={() => {
-                          setIsLiked(!isLiked)
-                          if (isDisliked === true) setIsDisliked(false)
-                        }}>
-                          {isLiked ? <VscThumbsupFilled className="ml-2 mr-2 text-2xl animate-jump-in" /> : <VscThumbsup className="ml-2 mr-2 text-2xl" />}
-                          <span className="mr-2">{isLiked ? convertNumberToK(Number(videoData[0]?.statistics?.viewCount) + 1) : convertNumberToK(videoData[0]?.statistics?.viewCount)}</span>
-                        </span>
-                        <span className="text-gray-400 text-2xl">|</span>
-                        <span className="px-4 py-2 rounded-r-full hover:bg-gray-200" onClick={() => {
-                          setIsDisliked(!isDisliked)
-                          if (isLiked === true) setIsLiked(false)
-                        }}>
-                          {isDisliked ? <VscThumbsdownFilled className="text-2xl animate-jump-in" /> : <VscThumbsdown className="text-2xl" />}
-                        </span>
-                    </span>
+                    {
+                      (userData && userData?.uid) ?
+                      <span className="mr-8 rounded-full border border-black flex items-center cursor-pointer">
+                          <span className="hover:bg-gray-200 flex items-center h-full w-full rounded-l-full p-2" onClick={() => {
+                            setIsLiked(!isLiked)
+                            if (isDisliked === true) setIsDisliked(false)
+                          }}>
+                            {isLiked ? <VscThumbsupFilled className="ml-2 mr-2 text-2xl animate-jump-in" /> : <VscThumbsup className="ml-2 mr-2 text-2xl" />}
+                            <span className="mr-2">{isLiked ? convertNumberToK(Number(videoData[0]?.statistics?.viewCount) + 1) : convertNumberToK(videoData[0]?.statistics?.viewCount)}</span>
+                          </span>
+                          <span className="text-gray-400 text-2xl">|</span>
+                          <span className="px-4 py-2 rounded-r-full hover:bg-gray-200" onClick={() => {
+                            setIsDisliked(!isDisliked)
+                            if (isLiked === true) setIsLiked(false)
+                          }}>
+                            {isDisliked ? <VscThumbsdownFilled className="text-2xl animate-jump-in" /> : <VscThumbsdown className="text-2xl" />}
+                          </span>
+                      </span> : ""
+                    }
                     <button className="flex items-center bg-black px-6 py-2 text-lg rounded-full text-white hover:bg-gray-800 tracking-wider ml-auto">
                       <SlActionRedo className="mr-2" /> Share
                     </button>
@@ -125,13 +151,17 @@ const WatchPage = () => {
               <div>
                 <CommentsList commentsData={commentsData} parentCommentId={0} />
               </div>
-              <input type="text" className="w-full pb-2 resize-none min-h-[24px] max-h-24 overflow-y-auto text-xl bg-transparent border-b border-b-gray-300 focus:border-b focus:border-black focus:outline-none" />
-              <div className="flex">
-                <div className="ml-auto mt-2">
-                  <button className="px-4 py-2 mr-2 hover:text-gray-600">Cancel</button>
-                  <button className="px-4 py-2 bg-black text-white hover:bg-gray-800 rounded-full">Comment</button>
-                </div>
-              </div>
+              {
+                (userData && userData?.uid) ? <form onSubmit={(e) => handleAddComment(e)}> 
+                  <input type="text" className="w-full pb-2 resize-none min-h-[24px] max-h-24 overflow-y-auto text-xl bg-transparent border-b border-b-gray-300 focus:border-b focus:border-black focus:outline-none" onChange={(e) => setComment(e.target.value)} value={comment} />
+                  <div className="flex">
+                    <div className="ml-auto mt-2">
+                      <button className="px-4 py-2 mr-2 hover:text-gray-600" onClick={() => setComment("")}>Cancel</button>
+                      <button type="submit" className="px-4 py-2 bg-black text-white hover:bg-gray-800 rounded-full">Comment</button>
+                    </div>
+                  </div>
+                </form> : <SignInButton buttonText="Sign In to Comment" customClassName="w-full" />
+              }
             </div>
         </div>
         <div>

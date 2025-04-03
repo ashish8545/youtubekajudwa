@@ -149,3 +149,5 @@ npm i react-router-dom
     - Implementing recursion for comment replies
     - Collapsible replies with count
     - Last commented time
+    - Adding dummy comments
+- Sign in to like, subscribe and comment functionality
