@@ -10,7 +10,7 @@ const Comment = ({ imageUrl, name, comment, updatedAt }) => {
         <div className="ml-4">
             <span className="font-bold">{name}</span>
             <span className="text-sm ml-2">{convertUtcToDaysAgo(updatedAt)}</span>
-            <p>{comment.startsWith("@@") ? ("@" + comment.slice(2)) : comment}</p>
+            <div dangerouslySetInnerHTML={{ __html: (comment.startsWith("@@") ? ("@" + comment.slice(2)) : comment) }}></div>
         </div>
         </div>
     </div>
