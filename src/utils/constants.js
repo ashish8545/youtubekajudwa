@@ -11,3 +11,4 @@ export const YOUTUBE_VIDEO_CATEGORIES_API   = "https://youtube.googleapis.com/yo
 export const YOUTUBE_SUBSCRIPTIONS_API      = "https://youtube.googleapis.com/youtube/v3/subscriptions?mine=true&part=snippet%2CcontentDetails&maxResults=50&key=" + YOUTUBE_API_KEY;
 export const YOUTUBE_COMMENTS_API           = "https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&key=" + YOUTUBE_API_KEY;
 export const YOUTUBE_SUGGESTIONS_API        = "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+export const YOUTUBE_LIVE_CHAT_MESSAGES_API = "https://youtube.googleapis.com/youtube/v3/liveChat/messages?part=snippet%2CauthorDetails&key=" + YOUTUBE_API_KEY;

@@ -7,6 +7,7 @@ import userReducer from "./slices/userSlice";
 import subscriptionsReducer from "./slices/subscriptionsSlice";
 import tokenReducer from "./slices/tokenSlice";
 import resultsReducer from "./slices/resultsSlice";
+import recommendedVideosReducer from "./slices/recommendedVideosSlice";
 
 const appStore = configureStore({
     reducer: {
@@ -18,6 +19,7 @@ const appStore = configureStore({
         subscriptions: subscriptionsReducer,
         token: tokenReducer,
         results: resultsReducer,
+        recommendedVideos: recommendedVideosReducer
     }
 });
 

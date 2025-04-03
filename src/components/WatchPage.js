@@ -8,6 +8,8 @@ import { SlActionRedo } from "react-icons/sl";
 import { VscThumbsdown, VscThumbsdownFilled, VscThumbsup, VscThumbsupFilled } from "react-icons/vsc";
 import CommentsList from "./CommentsList";
 import SignInButton from "./common/SignInButton";
+import RecommendedVideos from "./RecommendedVideos";
+import LiveChats from "./LiveChats";
 
 const WatchPage = () => {
   const [videoData, setVideoData]       = useState([]);
@@ -36,11 +38,10 @@ const WatchPage = () => {
         setChannelData(channelJson?.items || [])
 
         // Comments Data
-        console.log(YOUTUBE_COMMENTS_API + "&videoId=" + searchQuery)
         const commentsData = await fetch(YOUTUBE_COMMENTS_API + "&videoId=" + searchQuery)
         const commentsJson = await commentsData.json();
 
-        setCommentsData(commentsJson?.items || [])
+        setCommentsData(commentsJson?.items?.slice(0, 5) || [])
       }
 
     } catch (error) {
@@ -108,7 +109,7 @@ const WatchPage = () => {
                   {
                     (userData && userData?.uid) 
                       ? <button className="bg-black py-3 px-7 text-md rounded-full text-white hover:bg-gray-800 tracking-wider">Subscribe</button> 
-                      : <SignInButton buttonText="Sign In to Subscribe" customClassName="w-full" />
+                      : ""
                   }
                 </div>
               </div>
@@ -165,7 +166,15 @@ const WatchPage = () => {
             </div>
         </div>
         <div>
-          Chats
+          {
+            videoData[0]?.liveStreamingDetails?.activeLiveChatId && 
+            <div>
+              {/* <LiveChats liveChatId={videoData[0]?.liveStreamingDetails?.activeLiveChatId} /> */}
+            </div>
+          }
+          <div className="h-screen overflow-y-scroll">
+            <RecommendedVideos videoCategoryId={videoData[0]?.snippet?.categoryId} />
+          </div>
         </div>
       </div>
     </div>

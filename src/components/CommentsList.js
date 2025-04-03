@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Comment from "./Comment";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 
