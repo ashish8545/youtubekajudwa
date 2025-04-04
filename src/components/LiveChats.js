@@ -37,6 +37,7 @@ const LiveChats = ({ liveChatId }) => {
       }
 
     useEffect(() => {
+        getLiveChats();
         const chatInterval = setInterval(() => {
             getLiveChats();
         }, 15000)
