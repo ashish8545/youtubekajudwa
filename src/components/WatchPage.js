@@ -140,13 +140,15 @@ const WatchPage = () => {
                   </div>
               </div>
             </div>
-            <div className="mt-6 px-4 py-4 rounded-xl bg-gray-200">
-              <span>
-                {videoData[0]?.snippet?.description.length > DESCRIPTION_OFFSET && !isReadMore ? videoData[0]?.snippet?.description.substring(0, DESCRIPTION_OFFSET) : videoData[0]?.snippet?.description}
-                {!isReadMore ? <span className="font-semibold text-gray-700 cursor-pointer" onClick={() => setIsReadMore(!isReadMore)}> ...more</span> : ""}
-                {isReadMore ? <p className="font-semibold text-gray-700 cursor-pointer" onClick={() => setIsReadMore(!isReadMore)}>Show less</p> : ""}
-              </span>
-            </div>
+            { videoData[0]?.snippet?.description.length > DESCRIPTION_OFFSET && 
+              <div className="mt-6 px-4 py-4 rounded-xl bg-gray-200">
+                <span>
+                  {!isReadMore ? videoData[0]?.snippet?.description.substring(0, DESCRIPTION_OFFSET) : videoData[0]?.snippet?.description}
+                  {!isReadMore ? <span className="font-semibold text-gray-700 cursor-pointer" onClick={() => setIsReadMore(!isReadMore)}> ...more</span> : ""}
+                  {isReadMore ? <p className="font-semibold text-gray-700 cursor-pointer" onClick={() => setIsReadMore(!isReadMore)}>Show less</p> : ""}
+                </span>
+              </div>
+            }
             <div className="pt-4">
               <h2 className="text-2xl font-bold pb-2">Comments</h2>
               <div>

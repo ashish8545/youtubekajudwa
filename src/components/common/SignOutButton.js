@@ -9,6 +9,7 @@ const SignOutButton = ({ customClassName }) => {
 
     const handleSignOut = () => {
         signOut(auth).then(() => {
+            localStorage.removeItem("token");
             console.log('Logged out successfully!')
         }).catch((error) => {
             console.error('Error signing out:', error);
