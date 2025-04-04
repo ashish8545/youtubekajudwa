@@ -153,8 +153,10 @@ const WatchPage = () => {
                 <CommentsList commentsData={commentsData} parentCommentId={0} />
               </div>
               {
-                (userData && userData?.uid) ? <form onSubmit={(e) => handleAddComment(e)}> 
-                  <input type="text" className="w-full pb-2 resize-none min-h-[24px] max-h-24 overflow-y-auto text-xl bg-transparent border-b border-b-gray-300 focus:border-b focus:border-black focus:outline-none" onChange={(e) => setComment(e.target.value)} value={comment} />
+                (userData && userData?.uid) ? <form onSubmit={handleAddComment}> 
+                  <input type="text" className="w-full pb-2 resize-none min-h-[24px] max-h-24 overflow-y-auto text-xl bg-transparent border-b border-b-gray-300 focus:border-b focus:border-black focus:outline-none" onChange={(e) => setComment(e.target.value)} value={comment} onKeyDown={(e) => {
+                    if (e.key === "Enter") handleAddComment(e);
+                  }} />
                   <div className="flex">
                     <div className="ml-auto mt-2">
                       <button className="px-4 py-2 mr-2 hover:text-gray-600" onClick={() => setComment("")}>Cancel</button>

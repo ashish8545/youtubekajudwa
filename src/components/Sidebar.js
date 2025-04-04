@@ -39,10 +39,10 @@ const Sidebar = () => {
 
   useEffect(() => {
     setSubscriptions([]);
-    if (userData && userData.uid) {
+    if (userData && userData?.uid) {
       getChannels();
     }
-  }, [token, userData])
+  }, [token])
 
   return isMenuOpen ? (
     <div className="mt-2 w-60 h-full overflow-y-auto scrollbar-thin scrollbar-track-zinc-100 scrollbar-thumb-zinc-500">

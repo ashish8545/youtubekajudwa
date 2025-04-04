@@ -12,7 +12,7 @@ const RecommendedVideos = ({ videoCategoryId }) => {
     const [channels, setChannels]   = useState([]);
     
     const fetchVideos = async () => {
-        const data = await fetch(YOUTUBE_VIDEOS_API + "&chart=mostPopular&maxResults=10&videoCategoryId=" + videoCategoryId);
+        const data = await fetch(YOUTUBE_VIDEOS_API + "&chart=mostPopular&maxResults=15&videoCategoryId=" + videoCategoryId);
         const json = await data.json();
         
         setVideos(json?.items || [])
