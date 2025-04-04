@@ -169,14 +169,14 @@ const WatchPage = () => {
               }
             </div>
         </div>
-        <div>
+        <div className="pr-10">
           {
             videoData[0]?.liveStreamingDetails?.activeLiveChatId && 
             <div>
-              {/* <LiveChats liveChatId={videoData[0]?.liveStreamingDetails?.activeLiveChatId} /> */}
+              <LiveChats liveChatId={videoData[0]?.liveStreamingDetails?.activeLiveChatId} />
             </div>
           }
-          <div className="h-screen overflow-y-scroll">
+          <div className="">
             <RecommendedVideos videoCategoryId={videoData[0]?.snippet?.categoryId} />
           </div>
         </div>

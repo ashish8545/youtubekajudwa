@@ -149,6 +149,10 @@ npm i react-router-dom
     - Implementing recursion for comment replies
     - Collapsible replies with count
     - Last commented time
-    - Adding dummy comments
+    - Adding dummy comments ( It's removed after page change or refresh as we are getting real time comments but not actually adding them in real time )
 - Sign in to like, subscribe and comment functionality
 - Recommended Videos
+- Live Chat
+    - API / Long Polling
+    - Every 15 seconds get new chats as the youtube API has quota limit
+    - Add dummy chat ( It's removed after every api call as we are fetching live data and not inserting to live data )

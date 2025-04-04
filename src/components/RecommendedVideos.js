@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import RecommendedVideoCard from "./RecommendedVideoCard"
 import { useDispatch, useSelector } from "react-redux";
 import { cachedRecommendedVideos } from "../utils/slices/recommendedVideosSlice";
-import { YOUTUBE_CHANNELS_API, YOUTUBE_SEARCH_API, YOUTUBE_VIDEOS_API } from "../utils/constants";
+import { YOUTUBE_CHANNELS_API, YOUTUBE_VIDEOS_API } from "../utils/constants";
 
 const RecommendedVideos = ({ videoCategoryId }) => {
 
@@ -44,7 +44,9 @@ const RecommendedVideos = ({ videoCategoryId }) => {
     return (
         <div className="p-2 mt-4">
             <div className="py-2 rounded-md text-xl font-bold">Recommended Videos</div>
-            { videos.map(video => <RecommendedVideoCard key={video?.id} video={video} channels={channels} />) }
+            <div className="h-screen overflow-y-scroll">
+                { videos.map(video => <RecommendedVideoCard key={video?.id} video={video} channels={channels} />) }
+            </div>
         </div>
     )
 }
